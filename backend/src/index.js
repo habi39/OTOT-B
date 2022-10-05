@@ -1,7 +1,7 @@
 // FileName: index.js
 // Import express
 import * as dotenv from 'dotenv';
-dotenv.config()
+dotenv.config({path:'./../.env'})
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -33,13 +33,8 @@ router.put('/contacts/:contact_id',updateContact)
 router.delete('/contacts/:contact_id',deleteContact)
 
 let mongoDB = process.env.ENV == "PROD" ? process.env.DB_CLOUD_URI : process.env.DB_LOCAL_URI;
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 
-if(mongoDB == undefined){
-     console.log(process.env.ENV)
-  mongoose.connect("mongodb://localhost:27017/mydb", { useNewUrlParser: true , useUnifiedTopology: true});
-} else{
-  mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
-}
 
 var db = mongoose.connection;
 if(!db){
