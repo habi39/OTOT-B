@@ -26,11 +26,11 @@ jobs:
         cache-dependency-path: "**/package-lock.json"
     - name: Install project dependencies
       run: npm install --prefer-offline --frozen-lockfile
-    - name: Run Jest
-      run: npm test
-      env:
-        ENV: PROD
-        DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
+#     - name: Run Jest
+#       run: npm test
+#       env:
+#         ENV: PROD
+#         DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
   
   # deploy:
   #   needs: test
