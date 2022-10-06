@@ -56,7 +56,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v0
 
     - name: Authorise Docker push
-      run: gcloud auth configure-docker 
+      run: gcloud auth configure-docker asia-southeast1-docker.pkg.dev
 
     - name: Build Docker image
       run: docker build . -t $IMAGE_NAME
