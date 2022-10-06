@@ -34,7 +34,6 @@ jobs:
       env:
         ENV: PROD
         DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
-  
   deploy:
     runs-on: ubuntu-latest
     defaults:
