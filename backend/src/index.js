@@ -1,5 +1,3 @@
-// FileName: index.js
-// Import express
 import * as dotenv from 'dotenv';
 dotenv.config({path:'./../.env'})
 import express from 'express';
@@ -47,3 +45,5 @@ app.use('/api', router)
 app.listen(port, function () {
      console.log("Running RestHub on port " + port);
 });
+
+export default app

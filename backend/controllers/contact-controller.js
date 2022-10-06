@@ -28,7 +28,10 @@ export async function getContact(req, res) {
 export async function createContact(req, res) {
     try {
         var contact = new contactModel();
-        contact.name = req.body.name ? req.body.name : contact.name;
+        if (!(req.body.email && req.body.name)) {
+            return res.status(400).json({message: 'email and name has to be specified'});
+          }
+        contact.name = req.body.name;
         contact.gender = req.body.gender;
         contact.email = req.body.email;
         contact.phone = req.body.phone;
@@ -38,8 +41,7 @@ export async function createContact(req, res) {
                 return res.json(err);
             }
                 
-        return res.json({
-                status: "success",
+        return res.status(200).json({
                 message: 'successfully added contact',
                 data: contact
             });
