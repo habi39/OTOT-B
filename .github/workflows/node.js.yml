@@ -30,4 +30,5 @@ jobs:
     - name: Run Jest
       run: npm test
       env:
-          DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority 
+        ENV: PROD
+        DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority 
