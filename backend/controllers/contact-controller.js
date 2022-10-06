@@ -137,7 +137,6 @@ export async function deleteContact(req, res) {
                 if (err){
                     return res.send(err);
                 }
-                console.log(contact)
                 if(contact==null){
                     return res.json({
                         status: "error",
