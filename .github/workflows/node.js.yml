@@ -24,8 +24,8 @@ jobs:
         node-version: 18.x
         cache: 'npm'
         cache-dependency-path: "**/package-lock.json"
-    - name: Install project dependencies
-      run: npm install --prefer-offline --frozen-lockfile
+#     - name: Install project dependencies
+#       run: npm install --prefer-offline --frozen-lockfile
 #     - name: Run Jest
 #       run: npm test
 #       env:
