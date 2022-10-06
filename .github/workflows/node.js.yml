@@ -38,7 +38,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: backend
+      IMAGE_NAME: asia-southeast1-docker.pkg.dev/hybrid-dolphin-364409/cloud-run-source-deploy/backend:latest
     defaults:
       run:
         working-directory: "backend"
