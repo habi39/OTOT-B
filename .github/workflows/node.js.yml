@@ -25,12 +25,13 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "**/package-lock.json"
     - name: Install project dependencies
-      run: yarn install --prefer-offline --frozen-lockfile
+      run: npm install --prefer-offline --frozen-lockfile
     - name: Run Jest
       run: npm test
       env:
         ENV: PROD
         DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
+  
   deploy:
     needs: test
     permissions:
@@ -49,7 +50,7 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           credentials_json: "${{secrets.GCP_CREDENTIALS}}"
-          
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
 
