@@ -18,19 +18,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'npm'
-        cache-dependency-path: "**/package-lock.json"
-    - name: Install project dependencies
-      run: npm install --prefer-offline --frozen-lockfile
-    - name: Run Jest
-      run: npm test
-      env:
-        ENV: PROD
-        DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
+    # - name: Use Node.js 18
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: 18.x
+    #     cache: 'npm'
+    #     cache-dependency-path: "**/package-lock.json"
+    # - name: Install project dependencies
+    #   run: npm install --prefer-offline --frozen-lockfile
+    # - name: Run Jest
+    #   run: npm test
+    #   env:
+    #     ENV: PROD
+    #     DB_CLOUD_URI: mongodb+srv://hanbin:81265496@ototb.iosbmu1.mongodb.net/?retryWrites=true&w=majority
   
   # deploy:
   #   needs: test
