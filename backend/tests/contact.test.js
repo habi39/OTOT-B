@@ -6,6 +6,7 @@ let validContactId = "";
 
 export const validContact = {
   email: "dummy@email.com",
+  create_date: "2022-10-06T08:05:27.589Z",
   name: "Dummy User",
   gender: "male",
   phone: "+65 8491 2483",
@@ -54,7 +55,64 @@ describe("from /contacts",()=>{
 })
 
 describe("from /contacts/:contacts_id",()=>{
+  describe("GET", () => {
+    describe("given a valid string that does not exist in db", () => {
+      test("returns json stating id does not exist", async () => {
+        const invalidContactId = "0123abcd0123abcd0123abcd";
+        const res = await request(app).get(
+          `/api/contacts/${invalidContactId}`
+        );
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toBe(`user not found`);
+      });
+    });
+    describe("given a valid contact_id", () => {
+      test("return associated contact", async () => {
+        const res = await request(app).get(`/api/contacts/${validContactId}`);
+        expect(res.statusCode).toBe(200);
+        expect(res.body.data._id).toEqual(validContactId);
+      });
+    });
+  });
+    describe("PATCH/PUT", () => {
+      describe("given a valid string that does not exist in db", () => {
+        test("returns json stating id does not exist", async () => {
+          const invalidContactId = "0123abcd0123abcd0123abcd";
+          const res = await request(app).patch(
+            `/api/contacts/${invalidContactId}`
+          );
+          expect(res.statusCode).toBe(400);
+          expect(res.body.message).toBe(`user not found`);
+        });
+      });
+      describe("modify single valid field", () => {
+        test("returns contact before and after the change", async () => {
+          const { gender, ...info } = validContact;
+          let updatedContact = {
+            _id: validContactId,
+            ...info,
+            gender: "female",
+          }; //originally male
+          const res = await request(app)
+            .patch(`/api/contacts/${validContactId}`)
+            .send(updatedContact);
+  
+          expect(res.statusCode).toBe(200);
+          expect(res.body.data.updated.gender).toEqual(updatedContact.gender);
+        });
+      });
+    });
     describe("DELETE", () => {
+      describe("given a valid string that does not exist in db", () => {
+        test("returns json stating id does not exist", async () => {
+          const invalidContactId = "0123abcd0123abcd0123abcd";
+          const res = await request(app).delete(
+            `/api/contacts/${invalidContactId}`
+          );
+          expect(res.statusCode).toBe(400);
+          expect(res.body.message).toBe(`user not found`);
+        });
+      });
       describe("remove valid contact_id", () => {
         test("returns success json with the deleted contact infomation", async () => {
           const res = await request(app).delete(

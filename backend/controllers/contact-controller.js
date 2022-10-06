@@ -60,10 +60,16 @@ export async function viewContact(req, res) {
                 message: err,
             });
         }
+        if(contact==null){
+            return res.status(400).json({
+                message: "user not found",
+            });
+        }
         return res.json({
             message: 'Contact details loading..',
             data: contact
         });
+        
     });
     }   catch (err) {
         return res.status(500).json({message: 'Database failure when viewing contacts!'})
@@ -85,8 +91,7 @@ export async function updateContact(req, res) {
             });
         }
         if(contact==null){
-            return res.json({
-                status: "error",
+            return res.status(400).json({
                 message: "user not found",
             });
         }
@@ -122,8 +127,7 @@ export async function deleteContact(req, res) {
         }
         contactModel.findById(req.params.contact_id, function (err, contact) {
             if(contact==null){
-                return res.json({
-                    status: "error",
+                return res.status(400).json({
                     message: "user not found",
                 });
             }
