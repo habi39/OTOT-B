@@ -1,9 +1,8 @@
 import axios from "axios"
 
 export const createAxiosInstance = () => {
-    console.log(process.env.REACT_APP_BASE_URL)
   return axios.create({
-    baseURL: "http://localhost:8080/",
+    baseURL: "https://backend-fvbmnx6qhq-as.a.run.app/",
     withCredentials: true,
     timeout: 120000
   })
