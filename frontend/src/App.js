@@ -2,6 +2,7 @@
 import './App.css';
 import { useEffect , useState } from 'react';
 import { createContacts, deleteContacts, getAllContacts, updateContact } from './api/contact';
+import { getExchangeRateData } from './api/exchangerate';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -34,8 +35,8 @@ import {
 function App() {
   const [contacts, setContacts] = useState([])
   const [page, setPage] = useState(0);
+  const [erDATA,  setErData] = useState();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
 
   const [action, setAction] = useState("Add")
   const [id, setId] = useState("")
@@ -72,6 +73,8 @@ function App() {
   }
   const fetchData = async () =>{
     const allcontacts = await getAllContacts()
+    const exchangeRateData = await getExchangeRateData()
+    setErData(exchangeRateData.data)
     setContacts(allcontacts.data.contacts)
   }
   const emptyRows =
@@ -307,6 +310,35 @@ function App() {
       <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
                 <Button variant={"outlined"} onClick={handleSubmit}>Submit</Button>
       </Box>
+      <Typography variant={"h3"} align="center" margin={"10px"}>Cloud Function Query </Typography>
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+          <TableCell>Currency</TableCell>
+            <TableCell>Exchange Rate</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+  { erDATA?
+        Object.entries(erDATA).map(([key, value]) =>
+        (
+          <TableRow
+            key={key}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          >
+             <TableCell component="th" scope="row">
+              {key}
+            </TableCell>
+            <TableCell component="th" scope="row">
+              {value}
+            </TableCell>
+          </TableRow>
+        )):null
+        }
+        </TableBody>
+      </Table>
+    </TableContainer>
     </Box>
   );
 }
