@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
  app.use(bodyParser.json());
 
 const corsOptions ={
-    origin:'https://hybrid-dolphin-364409.de.r.appspot.com', 
+    origin:['https://hybrid-dolphin-364409.de.r.appspot.com', 'http://localhost:3000'],
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
